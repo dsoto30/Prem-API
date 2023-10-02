@@ -75,8 +75,8 @@ def create_data():
         match_stats_df.append(match_stats)
 
     squad_season_stats = pd.concat(squad_season_stats, ignore_index=True)
-    squad_season_stats = squad_season_stats.reset_index()
-    squad_season_stats.rename(columns={'index': 'team_stats_id'}, inplace=True)
+    #squad_season_stats = squad_season_stats.reset_index()
+    #squad_season_stats.rename(columns={'index': 'team_stats_id'}, inplace=True)
     squad_season_stats.to_csv("prem-data/squad_stats.csv", index=False)
 
     match_stats_df = pd.concat(match_stats_df, ignore_index=True)
@@ -107,13 +107,12 @@ def create_data():
         "yellow_cards", "news", "expected_goal_involvements_per_90", "form_rank_type", "ict_index_rank_type", "chance_of_playing_next_round",
         "influence_rank", "penalties_order", "form", "dreamteam_count", "chance_of_playing_this_round", "points_per_game", 
         "in_dreamteam", "form_rank", "selected_rank", "expected_goals_per_90", "threat_rank", "ep_this", "transfers_in",
-        "bps", "goals_conceded_per_90", "selected_by_percent", "influence_rank_type", "points_per_game_rank_type", "now_cost_rank"
-    ]
+        "bps", "goals_conceded_per_90", "selected_by_percent", "influence_rank_type", "points_per_game_rank_type", "now_cost_rank", "penalties_missed"]
     players_df = players_df.drop(columns=columns_to_drop)
 
     players_df = players_df.rename(columns={"team": "team_id"})
     players_df.reset_index(inplace=True)
-    players_df.rename(columns={"index": "player_id"}, inplace=True)
+    players_df.rename(columns={"index": "player_id", "name": "player_name", "position": "player_position"}, inplace=True)
     players_df["team_id"] = players_df["team_id"].apply(lambda x: map_team_name(x, team_id_mapping))
 
     players_df.to_csv("prem-data/players.csv", index=False)
