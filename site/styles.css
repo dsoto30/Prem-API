@@ -1,0 +1,35 @@
+/* CSS styles for the header */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333; /* Change the background color as desired */
+    padding: 10px 20px;
+    color: white; /* Text color for the header */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar_links {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar_link a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.navbar_link a:hover {
+    color: #ff6600; /* Change the color on hover */
+}
