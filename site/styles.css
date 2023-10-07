@@ -1,22 +1,23 @@
-/* CSS styles for the header */
 * {
     margin: 0;
     padding: 0;
 }
 
-header {
+.header_container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #333; /* Change the background color as desired */
+    background-color: #333; 
     padding: 10px 20px;
-    color: white; /* Text color for the header */
-}
+    color: white;
+} 
+
 
 .logo {
     font-size: 24px;
     font-weight: bold;
 }
+
 
 .navbar_links {
     list-style-type: none;
@@ -25,11 +26,11 @@ header {
 }
 
 .navbar_link a {
-    text-decoration: none;
     color: white;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .navbar_link a:hover {
-    color: #ff6600; /* Change the color on hover */
+    color: #bf81d8; 
 }
