@@ -1,23 +1,94 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
-.header_container {
+.grid_layout {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+.header_container, .footer_container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     background-color: #333; 
     padding: 10px 20px;
     color: white;
+    grid-column: span 2;
 } 
 
+.header_container {
+    justify-content: space-between;
+}
+
+.footer_container {
+    justify-content: flex-end;
+}
+
+.content {
+    grid-column: span 2;
+    position: relative;
+    padding: 10px;
+}
+
+.content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url(images/background-haaland.jpg);
+    opacity: 0.3; /* Opacity for the background image */
+    background-size: cover;
+    z-index: -1; /* Place the background image behind the content */
+}
+
+.search_content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    grid-column: span 2;
+}
+
+.search-bar {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    width: 80%; /* Set the width to 90% of the container */
+}
+
+
+.search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: #45a049;
+}
 
 .logo {
     font-size: 24px;
     font-weight: bold;
 }
-
 
 .navbar_links {
     list-style-type: none;
@@ -33,4 +104,8 @@
 
 .navbar_link a:hover {
     color: #bf81d8; 
+}
+
+.text {
+    padding: 20px;
 }
