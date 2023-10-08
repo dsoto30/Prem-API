@@ -6,24 +6,55 @@
     <title>PREM-API</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images\Premier-League-symbol.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="header_container">
-        <div class="logo">PREM-API</div>
-        <ul class="navbar_links">
-            <li class="navbar_link">
-                <a href="players.html" target="_blank">Players</a>
-            </li>
-            <li class="navbar_link">
-                <a href="teams.html" target="_blank">Teams</a>
-            </li>
-            <li class="navbar_link">
-                <a href="https://github.com/dsoto30/Prem-API" target="_blank">Github Repo</a>
-            </li>
-        </ul>
-    </header>
-    <footer>
 
-    </footer>
+    <div class="grid_layout">
+    
+        <header class="header_container">
+            <div class="logo">PREM-API</div>
+            <ul class="navbar_links">
+                <li class="navbar_link">
+                    <a href="players.html" target="_blank">Players</a>
+                </li>
+                <li class="navbar_link">
+                    <a href="teams.html" target="_blank">Teams</a>
+                </li>
+                <li class="navbar_link">
+                    <a href="https://github.com/dsoto30/Prem-API" target="_blank">Github Repo</a>
+                </li>
+            </ul>
+        </header>
+
+
+
+        <!-- <div class="sidebar">SIDEBAR</div> -->
+        
+        <div class="content">
+            <h1 class="heading">About</h1>
+            <p class="text" >Hey everyone, as a football fan and developer wanted to combine
+                both interests into the reation of this project. This project involves using a RESTful API service
+                using <a href="https://www.kaggle.com/datasets/meraxes10/fantasy-premier-league-dataset-2022-2023">FPL Player Data 2022-2023</a> 
+                and <a href="https://fbref.com/en/comps/9/Premier-League-Stats">Team's Stats and Results</a> from previous 3 completed seasons.
+                This will be done using Python Flask and Pandas for data cleaning and analysis. I will also try to add some features that uses APIs to provide
+                real time Match data such as upcoming fixtures, season player statistics. 
+            </p>
+
+        </div>
+    
+    
+        <footer class="footer_container">
+            <ul class="navbar_links">
+                <li class="navbar_link"><a href="https://www.linkedin.com/in/daniel-soto-680a711b1/">Linkedin</a></li>
+                <li class="navbar_link"><a href="https://github.com/dsoto30">Github</a></li>
+            </ul>
+        </footer>
+
+    </div>
+
+
 </body>
 </html>
