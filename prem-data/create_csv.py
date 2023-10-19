@@ -1,14 +1,18 @@
 import pandas as pd
 import requests
 from fuzzywuzzy import fuzz
+import os
+from io import StringIO
 
 
 season_map = {"2022-2023": 0, "2021-2022" : 1, "2020-2021": 2}
 
 team_id_mapping = {}
 
-# Function to assign IDs to team names
 def create_team_map(team_name):
+    """
+    Creates the team_id map for each team_name, team_id will be used for foreign key for our Data Tables
+    """
     if team_name in team_id_mapping:
         return team_id_mapping[team_name]
     else:
@@ -17,6 +21,11 @@ def create_team_map(team_name):
         return new_id
 
 def map_team_name(input_name, team_dict):
+    """
+    Since we have a variety of ways of menioning the same team Ex. Man City -> Manchester City
+    we take a input_name and return the team_id to the closest similar name using a third party library.
+    """
+
     best_match = None
     best_match_score = -1
 
@@ -31,18 +40,23 @@ def map_team_name(input_name, team_dict):
 
 
 def create_data():
-    squad_season_stats = []
-    match_stats_df = []
+    """
+    Creates the data frames using pandas by either web scraping or reading csv files for our players and squad data
+    """
+    squad_season_stats = []   # Squad stats for multiple seasons
+    match_stats_df = []        # match result data for multiple seasons
 
     for year, val in season_map.items():
 
-        # sqaud season statistics web scraping and data cleaning...
+        # squad season statistics web scraping and data cleaning...
 
         url = f"https://fbref.com/en/comps/9/{year}/{year}-Premier-League-Stats"
 
         fbref_html = requests.get(url)
+
+        fbref_buffer = StringIO(fbref_html.text)
         
-        squad_stats_df = pd.read_html(fbref_html.text, match="Squad Standard Stats")[0]
+        squad_stats_df = pd.read_html(fbref_buffer, match="Squad Standard Stats")[0]
         squad_stats_df.columns = squad_stats_df.columns.droplevel()
         squad_stats_df = squad_stats_df.loc[:, :"PrgP"]
 
@@ -60,7 +74,9 @@ def create_data():
 
         # matches statistics data cleaning...
 
-        match_stats = pd.read_csv(f"prem-data\data\pl-{year}.csv")
+        match_stats_path = os.path.join(".", "data", f"pl-{year}.csv")
+
+        match_stats = pd.read_csv(match_stats_path)
         match_stats = match_stats.loc[:, :"B365A"]
 
         columns_to_drop = ["Div", "HTHG", "HTAG", "HTR", "Referee", "HF", "AF", "HY", "AY", "HR", "AR"]
@@ -75,28 +91,31 @@ def create_data():
         match_stats_df.append(match_stats)
 
     squad_season_stats = pd.concat(squad_season_stats, ignore_index=True)
-    #squad_season_stats = squad_season_stats.reset_index()
-    #squad_season_stats.rename(columns={'index': 'team_stats_id'}, inplace=True)
-    squad_season_stats.to_csv("prem-data/squad_stats.csv", index=False)
+    squad_season_stats.to_csv("./new-data/squad_stats.csv", index=False)
 
     match_stats_df = pd.concat(match_stats_df, ignore_index=True)
     match_stats_df = match_stats_df.reset_index()
     match_stats_df.rename(columns={"index": "match_id"}, inplace=True)
-    match_stats_df.to_csv("prem-data/match_results.csv", index=False)
+    match_stats_df.to_csv("./new-data/match_results.csv", index=False)
 
+    # season map to csv file
 
     seasons_df = pd.DataFrame.from_dict(season_map, orient='index', columns=["season_id"])
     seasons_df.reset_index(inplace=True)
     seasons_df.rename(columns={"index": "season"}, inplace=True)
-    seasons_df.to_csv("prem-data/seasons.csv", index=False)
+    seasons_df.to_csv("./new-data/seasons.csv", index=False)
 
+    # team_id map to csv file
 
     teams_df = pd.DataFrame.from_dict(team_id_mapping, orient='index', columns=["team_id"])
     teams_df.reset_index(inplace=True)
     teams_df.rename(columns={"index": "team_name"}, inplace=True)
-    teams_df.to_csv("prem-data/teams.csv", index=False)
+    teams_df.to_csv("./new-data/teams.csv", index=False)
 
-    players_df = pd.read_csv("prem-data\data\pl-players.csv")
+    # Premier League Fantasy data cleaning
+    players_path = os.path.join(".", "data", "pl-players.csv")
+
+    players_df = pd.read_csv(players_path)
     columns_to_drop = [
         "id", "now_cost", "clean_sheets_per_90", "threat_rank_type",
         "expected_assists_per_90", "points_per_game_rank", "creativity_rank_type",
@@ -115,12 +134,19 @@ def create_data():
     players_df.rename(columns={"index": "player_id", "name": "player_name", "position": "player_position"}, inplace=True)
     players_df["team_id"] = players_df["team_id"].apply(lambda x: map_team_name(x, team_id_mapping))
 
-    players_df.to_csv("prem-data/players.csv", index=False)
+    players_df.to_csv("./new-data/players.csv", index=False)
 
     return
 
 
 if __name__ == "__main__":
-    create_data()
+    """
+    Running script reads csv data and creates a "new-data" folder containing our csv files to import to our
+    PostgreSQL database
+    """
+    if not os.path.exists("new-data"):
+        os.makedirs("new-data")
+
+    create_data()      
 
     

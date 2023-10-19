@@ -11,6 +11,8 @@ DROP DATABASE IF EXISTS premier_league;
 
 CREATE DATABASE premier_league;
 
+USE DATABASE premier_league;
+
 
 CREATE TYPE p_position AS ENUM ('GKP', 'DEF', 'MID', 'FWD');
 CREATE TYPE m_result AS ENUM ('A', 'H', 'D');
