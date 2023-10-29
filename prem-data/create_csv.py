@@ -141,7 +141,7 @@ def create_data():
 
 if __name__ == "__main__":
     """
-    Running script reads csv data and creates a "new-data" folder containing our csv files to import to our
+    Runs script that reads csv data and creates a "new-data" folder containing our csv files to import to our
     PostgreSQL database
     """
     if not os.path.exists("new-data"):
