@@ -1,3 +1,12 @@
+\c postgres
+
+DROP DATABASE IF EXISTS premier_league;
+
+CREATE DATABASE premier_league;
+
+\c premier_league;
+
+/*
 DROP TABLE IF EXISTS players;
 DROP TABLE IF EXISTS squad_stats;
 DROP TABLE IF EXISTS match_results;
@@ -5,29 +14,22 @@ DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS seasons;
 
 DROP TYPE IF EXISTS p_position;
-DROP TYPE IF EXISTS m_result;
-
-DROP DATABASE IF EXISTS premier_league;
-
-CREATE DATABASE premier_league;
-
-USE DATABASE premier_league;
-
+DROP TYPE IF EXISTS m_result;*/
 
 CREATE TYPE p_position AS ENUM ('GKP', 'DEF', 'MID', 'FWD');
 CREATE TYPE m_result AS ENUM ('A', 'H', 'D');
 
 CREATE TABLE teams (
     team_name VARCHAR(50) NOT NULL,
-    team_id SERIAL PRIMARY KEY);
+    team_id INT PRIMARY KEY);
 
 
 CREATE TABLE seasons (
-    season_id SERIAL PRIMARY KEY, 
+    season_id INT PRIMARY KEY, 
     season VARCHAR(10));
 
 CREATE TABLE players (
-    player_id SERIAL PRIMARY KEY, 
+    player_id INT PRIMARY KEY, 
     player_name VARCHAR(50) NOT NULL, 
     player_position p_position NOT NULL, 
     team_id INT NOT NULL, 
@@ -56,7 +58,7 @@ CREATE TABLE squad_stats (
     matches_played INT NOT NULL, 
     goals INT NOT NULL,
     assists INT NOT NULL,
-    gls_assists INT NOT NULL
+    gls_assists INT NOT NULL,
     non_pen_gls INT NOT NULL, 
     penalties_scored INT NOT NULL, 
     xg FLOAT NOT NULL, 
@@ -70,7 +72,7 @@ CREATE TABLE squad_stats (
     FOREIGN KEY (season_id) REFERENCES seasons(season_id) ON DELETE CASCADE);
 
 CREATE TABLE match_results (
-    match_id SERIAL NOT NULL, 
+    match_id INT NOT NULL, 
     match_date DATE NOT NULL, 
     match_time TIME NOT NULL, 
     home_team_id INT NOT NULL, 
@@ -89,5 +91,8 @@ CREATE TABLE match_results (
     away_odds FLOAT NOT NULL, 
     season_id INT NOT NULL, 
     PRIMARY KEY (match_id, home_team_id, away_team_id, season_id),
-    FOREIGN KEY (home_team_id, away_team_id) REFERENCES teams(team_id) ON DELETE CASCADE,
+    FOREIGN KEY (home_team_id) REFERENCES teams(team_id) ON DELETE CASCADE,
+    FOREIGN KEY (away_team_id) REFERENCES teams(team_id) ON DELETE CASCADE,
     FOREIGN KEY (season_id) REFERENCES seasons(season_id) ON DELETE CASCADE);
+
+\q
