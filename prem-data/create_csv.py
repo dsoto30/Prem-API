@@ -91,11 +91,43 @@ def create_data():
         match_stats_df.append(match_stats)
 
     squad_season_stats = pd.concat(squad_season_stats, ignore_index=True)
+    
+    new_squad_stats_columns = {
+        "age": "avg_age",
+        "poss": "possesion",
+        "mp": "matches_played",
+        "gls": "goals",
+        "ast": "assists",
+        "g+a": "gls_assists",
+        "g-pk": "non_pen_gls",
+        "pk": "penalties_scored"
+    }
+
+    squad_season_stats.rename(columns=new_squad_stats_columns, inplace=True)
+
     squad_season_stats.to_csv("./new-data/squad_stats.csv", index=False)
 
     match_stats_df = pd.concat(match_stats_df, ignore_index=True)
     match_stats_df = match_stats_df.reset_index()
     match_stats_df.rename(columns={"index": "match_id"}, inplace=True)
+
+    new_match_columns = {
+        "date": "match_date",
+        "time": "match_time",
+        "ftr": "match_result",
+        "hs": "home_shots",
+        "as": "away_shots",
+        "hst": "h_shot_target",
+        "ast": "a_shot_target",
+        "hc": "home_corners",
+        "ac": "away_corners",
+        "b365h": "home_odds",
+        "b365a": "away_odds",
+        "b365d": "draw_odds"
+    }
+
+    match_stats_df.rename(columns=new_match_columns, inplace=True)
+
     match_stats_df.to_csv("./new-data/match_results.csv", index=False)
 
     # season map to csv file
@@ -132,6 +164,20 @@ def create_data():
     players_df = players_df.rename(columns={"team": "team_id"})
     players_df.reset_index(inplace=True)
     players_df.rename(columns={"index": "player_id", "name": "player_name", "position": "player_position"}, inplace=True)
+
+
+    new_player_columns = {
+        "expected_assists": "x_assists",
+        "goals_scored": "goals",
+        "expected_goals_conceded": "x_goals_conceded",
+        "expected_goals": "x_goals",
+        "expected_goal_involvements": "x_goal_involvements",
+        "minutes": "minutes_played"
+    }
+
+    players_df.rename(columns=new_player_columns, inplace=True)
+
+
     players_df["team_id"] = players_df["team_id"].apply(lambda x: map_team_name(x, team_id_mapping))
 
     players_df.to_csv("./new-data/players.csv", index=False)

@@ -1,4 +1,4 @@
-match_id,date,time,home_team_id,away_team_id,fthg,ftag,ftr,hs,as,hst,ast,hc,ac,b365h,b365d,b365a,season_id
+match_id,match_date,match_time,home_team_id,away_team_id,fthg,ftag,match_result,home_shots,away_shots,h_shot_target,a_shot_target,home_corners,away_corners,home_odds,draw_odds,away_odds,season_id
 0,05/08/2022,20:00,7,1,0,2,A,10,10,2,2,3,5,4.2,3.6,1.85,0
 1,06/08/2022,12:30,9,12,2,2,D,9,11,3,4,4,4,11.0,6.0,1.25,0
 2,06/08/2022,15:00,3,2,2,0,H,7,15,3,2,5,5,3.75,3.5,2.0,0

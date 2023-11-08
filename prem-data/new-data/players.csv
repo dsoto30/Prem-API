@@ -1,4 +1,4 @@
-player_id,player_name,player_position,team_id,expected_assists,goals_scored,expected_goals_conceded,threat,influence,creativity,expected_goals,saves,goals_conceded,assists,ict_index,expected_goal_involvements,starts,minutes,total_points,clean_sheets
+player_id,player_name,player_position,team_id,x_assists,goals,x_goals_conceded,threat,influence,creativity,x_goals,saves,goals_conceded,assists,ict_index,x_goal_involvements,starts,minutes_played,total_points,clean_sheets
 0,Granit Xhaka,MID,1,3.89,7,36.52,498.0,647.0,673.3,4.65,0,35,8,182.0,8.54,36,2992,153,13
 1,Mohamed Elneny,MID,1,0.04,0,1.29,0.0,4.6,5.4,0.0,0,2,0,1.1,0.04,1,111,6,0
 2,Rob Holding,DEF,1,0.15,1,11.14,54.0,152.0,10.3,0.32,0,13,0,21.6,0.47,6,562,21,0
@@ -489,7 +489,7 @@ player_id,player_name,player_position,team_id,expected_assists,goals_scored,expe
 487,Cole Palmer,MID,13,0.49,0,7.13,97.0,59.2,72.4,0.36,0,4,1,23.1,0.85,2,358,19,1
 488,James McAtee,MID,13,0.0,0,0.0,0.0,0.0,0.0,0.0,0,0,0,0.0,0.0,0,0,0,0
 489,Erling Haaland,FWD,13,3.11,36,25.24,1825.0,1390.0,371.0,28.54,0,26,9,358.1,31.65,33,2767,272,13
-490,Julián Álvarez,FWD,13,1.63,9,17.14,545.0,430.8,271.1,6.79,0,16,3,124.7,8.42,13,1448,103,5
+490,Julian Alvarez,FWD,13,1.63,9,17.14,545.0,430.8,271.1,6.79,0,16,3,124.7,8.42,13,1448,103,5
 491,Luke Mbete-Tabu,DEF,13,0.0,0,0.0,0.0,0.0,0.0,0.0,0,0,0,0.0,0.0,0,0,0,0
 492,Josh Wilson-Esbrand,DEF,13,0.0,0,0.0,0.0,0.0,0.0,0.0,0,0,0,0.0,0.0,0,0,0,0
 493,Liam Delap,FWD,13,0.0,0,0.0,0.0,0.0,0.0,0.0,0,0,0,0.0,0.0,0,0,0,0

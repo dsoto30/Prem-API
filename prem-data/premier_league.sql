@@ -25,8 +25,8 @@ CREATE TABLE teams (
 
 
 CREATE TABLE seasons (
-    season_id INT PRIMARY KEY, 
-    season VARCHAR(10));
+    season VARCHAR(10),
+    season_id INT PRIMARY KEY);
 
 CREATE TABLE players (
     player_id INT PRIMARY KEY, 
@@ -73,7 +73,7 @@ CREATE TABLE squad_stats (
 
 CREATE TABLE match_results (
     match_id INT NOT NULL, 
-    match_date DATE NOT NULL, 
+    match_date VARCHAR(30) NOT NULL, 
     match_time TIME NOT NULL, 
     home_team_id INT NOT NULL, 
     away_team_id INT NOT NULL, 
