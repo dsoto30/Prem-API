@@ -22,7 +22,7 @@
     display: grid;
     /*grid-template-columns: 40% 60%;*/
     grid-template-rows: auto 1fr auto;
-    min-height: 150vh;
+    min-height: 100vh;
 }
 
 .header_container, .footer_container {
@@ -84,8 +84,9 @@
 
 .search_content {
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     grid-column: span 2;
 }
 

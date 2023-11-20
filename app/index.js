@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors()); // Allows CORS and Pre-Flight routes
 
 
-app.get("/teams", db.getTeams);
+app.get("/players", db.getPlayers);
 
 
 app.listen(port, (err) => {
