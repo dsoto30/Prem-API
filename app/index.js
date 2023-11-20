@@ -1,21 +1,25 @@
 const express =  require("express");
-const bodyParser = require("body-parser");
 const app = express();
-const port = 3000;
+const port = require("./config").PORT;
+const cors = require("cors");
+const helmet = require("helmet");
+
 const db = require("./queries");
 
-app.use(bodyParser.json());
-app.use(
-    bodyParser.urlencoded({
-        extended: true
-    })
-);
+app.use(helmet());
+app.use(express.json());
+app.use(cors()); // Allows CORS and Pre-Flight routes
 
 
-app.get("/teams", db.getTeams);
+app.get("/players", db.getPlayers);
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}.`);
+
+app.listen(port, (err) => {
+    if (err){
+        throw err;
+    }
+
+    console.log(`Server running on port ${port}`);
 });
 
 
