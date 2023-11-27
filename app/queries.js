@@ -21,28 +21,46 @@ const getPlayers = async (req, res) => {
     {
         console.error(err.message);
     }
-}
+};
 
+const getPlayerByID = async (req, res) => {
+    try {
 
+        const {playerID} = req.params;
+        const query = `SELECT *
+        FROM players
+        WHERE players.player_id = $1`;
+
+        const player = await pool.query(query, [playerID]);
+
+        res.json(player.rows[0]);
+        
+    } catch (err) {
+        console.error(err.message);
+    }
+};
+
+/*
 const getTeams = async (req, res) => {
     try {
         const searchTerm = req.query.teamName;
         const query = `SELECT teams.team_name, teams.team_id
         FROM teams
-        ORDER BY similarity(teams.team_name, '$1') DESC
+        ORDER BY similarity(teams.team_name, $1) DESC
         LIMIT 5;`;
 
-        const teams = await pool.query(query, [searchTerm]);
+        const teams = await pool.query(query, [String(searchTerm)]);
         res.json(teams.rows);
 
     } catch (error) {
         console.error(error.message);
     }
-}
+};*/
 
 
 
 
 module.exports = {
-    getPlayers
+    getPlayers,
+    getPlayerByID
 };

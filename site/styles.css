@@ -20,7 +20,6 @@
 
 .grid_layout {
     display: grid;
-    /*grid-template-columns: 40% 60%;*/
     grid-template-rows: auto 1fr auto;
     min-height: 100vh;
 }
@@ -88,6 +87,7 @@
     align-items: center;
     justify-content: flex-start;
     grid-column: span 2;
+    gap: 25px;
 }
 
 .search-bar {
@@ -112,9 +112,41 @@
     border: 1px solid #7e69c9;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    transition: background-color 0.3s linear;
 }
 
 .search-bar button:hover {
-    background-color: #7e69c9;
+    background-color: #410ff4;
 }
 
+
+/* Style for the unordered list */
+ul.search_results {
+    list-style: none;
+    padding: 0;
+}
+
+/* Style for each list item */
+ul.search_results li {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+ul.search_results li:hover {
+    background-color: #bbadec;
+    cursor: pointer;
+}
+
+/* Style for the anchor tags inside the list items */
+ul.search_results li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Hover effect for the anchor tags */
+ul.search_results li a:hover {
+    text-decoration: underline;
+}
