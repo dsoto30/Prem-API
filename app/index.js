@@ -13,6 +13,8 @@ app.use(cors()); // Allows CORS and Pre-Flight routes
 
 app.get("/players", db.getPlayers);
 app.get('/players/:playerID', db.getPlayerByID);
+app.get('/teams', db.getTeamByName);
+app.get('/teams/:teamID', db.getTeamDataByID);
 
 
 app.listen(port, (err) => {

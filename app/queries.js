@@ -40,27 +40,46 @@ const getPlayerByID = async (req, res) => {
     }
 };
 
-/*
-const getTeams = async (req, res) => {
-    try {
-        const searchTerm = req.query.teamName;
-        const query = `SELECT teams.team_name, teams.team_id
-        FROM teams
-        ORDER BY similarity(teams.team_name, $1) DESC
-        LIMIT 5;`;
+const getTeamByName = async (req, res) => {
 
-        const teams = await pool.query(query, [String(searchTerm)]);
+    try {
+        const {teamName} = req.params;
+        const query = `SELECT *
+        FROM teams`;
+
+        const teams = await pool.query(query);
+
         res.json(teams.rows);
 
-    } catch (error) {
-        console.error(error.message);
+    } catch (err) {
+        console.error(err.message);
     }
-};*/
+}
+
+const getTeamDataByID = async (req, res) => {
+    try {
+        const {teamID} = req.params;
+        const query = `SELECT teams.team_name, stats.players_used, stats.avg_age, stats.goals, stats.assists, stats.prgc, stats.prgp, seasons.season
+        FROM squad_stats AS stats
+        JOIN seasons ON stats.season_id=seasons.season_id
+        JOIN teams ON stats.team_id=teams.team_id
+        WHERE stats.team_id=$1;`;
+
+        const squad_stats = await pool.query(query, [teamID]);
+
+        res.json(squad_stats.rows);
+        
+    } catch (err) {
+        console.error(err.message);
+    }
+}
 
 
 
 
 module.exports = {
     getPlayers,
-    getPlayerByID
+    getPlayerByID,
+    getTeamByName,
+    getTeamDataByID
 };
