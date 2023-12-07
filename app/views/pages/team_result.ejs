@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= data[0].team_name %></title>
+    <link rel="stylesheet" href="../../public/styles.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<% data.forEach(team => { %>
+    <div class="team-container">
+        <h1 class="heading text"><%= team.team_name %> - <%= team.season %></h1>
+        <ul class="search_result">
+            <li>Players Used: <%= team.players_used %></li>
+            <li>Average Age: <%= team.avg_age %></li>
+            <li>Goals: <%= team.goals %></li>
+            <li>Assists: <%= team.assists %></li>
+            <li>PRGC: <%= team.prgc %></li>
+            <li>PRGP: <%= team.prgp %></li>
+        </ul>
+    </div>
+<% }); %>
+
+</body>
+</html>

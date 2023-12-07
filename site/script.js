@@ -5,28 +5,38 @@ function searchPlayers() {
     // Make an AJAX request to the backend
     fetch(`http://localhost:3000/players?playerName=${playerName}`)
       .then(response => response.json())
-      .then(data => displayResults(data))
+      .then(data => displayPlayerResults(data))
       .catch(error => console.error('Error fetching data:', error));
 }
   
-function displayResults(players) {
-    const resultsContainer = document.getElementById('player_search_results');
-    resultsContainer.innerHTML = '';
+function displayPlayerResults(players) {
+  const resultsContainer = document.getElementById('player_search_results');
+  resultsContainer.innerHTML = '';
+
+  if (players.length === 0) {
+    resultsContainer.innerHTML = 'No players found.';
+    return;
+  }
+
+  const list = document.createElement('ul');
+
+  list.classList.add("search_results");
   
-    if (players.length === 0) {
-      resultsContainer.innerHTML = 'No players found.';
-      return;
-    }
-  
-    const list = document.createElement('ul');
-    players.forEach(player => {
-      const listItem = document.createElement('li');
-      listItem.textContent = player.player_name;
-      list.appendChild(listItem);
-    });
-  
-    resultsContainer.appendChild(list);
+  players.forEach(player => {
+    const listItem = document.createElement('li');
+    const linkItem = document.createElement('a');
+    linkItem.title = player.player_name;
+    const node = document.createTextNode(player.player_name);
+    linkItem.appendChild(node);
+    linkItem.href = `http://localhost:3000/players/${player.player_id}`
+    linkItem.target = "_blank";
+    listItem.appendChild(linkItem);
+    list.appendChild(listItem); // Corrected this line
+  });
+
+  resultsContainer.appendChild(list);
 }
+
 
 function eventListeners() {
   const playerSearchBtn = document.getElementById('playerSearch');

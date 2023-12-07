@@ -1,0 +1,37 @@
+*,
+*::before, 
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+.heading, .text {
+    padding: 1rem;
+}
+
+.text {
+    max-width: 100ch;
+}
+
+ul.search_result {
+    list-style: none;
+    padding: 1rem;
+}
+
+/* Style for each list item */
+ul.search_result li {
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+ul.search_result li:hover {
+    background-color: #bbadec;
+    cursor: pointer;
+}
