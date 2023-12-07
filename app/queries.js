@@ -33,17 +33,16 @@ const getPlayerByID = async (req, res) => {
 
         const player = await pool.query(query, [playerID]);
 
-        res.json(player.rows[0]);
+        res.render("pages/player_result.ejs", player.rows[0]);
         
     } catch (err) {
         console.error(err.message);
     }
 };
 
-const getTeamByName = async (req, res) => {
+const getTeams = async (req, res) => {
 
     try {
-        const {teamName} = req.params;
         const query = `SELECT *
         FROM teams`;
 
@@ -67,7 +66,7 @@ const getTeamDataByID = async (req, res) => {
 
         const squad_stats = await pool.query(query, [teamID]);
 
-        res.json(squad_stats.rows);
+        res.render("pages/team_result.ejs", {data: squad_stats.rows});
         
     } catch (err) {
         console.error(err.message);
@@ -80,6 +79,6 @@ const getTeamDataByID = async (req, res) => {
 module.exports = {
     getPlayers,
     getPlayerByID,
-    getTeamByName,
+    getTeams,
     getTeamDataByID
 };

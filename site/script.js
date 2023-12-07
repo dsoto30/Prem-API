@@ -38,20 +38,9 @@ function displayPlayerResults(players) {
 }
 
 
-
-/*
-function searchTeams(){
-  const teamName = document.getElementById('teamName').value;
-
-}*/
-
 function eventListeners() {
   const playerSearchBtn = document.getElementById('playerSearch');
   playerSearchBtn.addEventListener('click', searchPlayers);
-
-  /*
-  const teamSearchBtn = document.getElementById('teamSearch');
-  teamSearchBtn.addEventListener('click', searchTeams);*/
 }
 
 document.addEventListener("DOMContentLoaded", function() { 
